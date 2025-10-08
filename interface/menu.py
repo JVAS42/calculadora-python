@@ -2,6 +2,7 @@ from operations.sum import sum
 from operations.subtraction import subtraction
 from operations.multiplication import multiplication
 from operations.division import division
+from operations.potency import potency
 
 def menu():
     print('=== CALCULADORA ===')
@@ -16,64 +17,33 @@ def menu():
 
         opcao = input('ESCOLHA SUA OPERAÇÃO: ')
 
-        if opcao == '1':
-            try:
-                numeros = input('INFORME OS NÚMEROS: ').split()
-                numeros = tuple(map(float, numeros))
-                total = sum(*numeros)
-                print('A SOMA TOTAL', end=' ⭢ ')
-                for i in range(len(numeros)):
-                    if i == (len(numeros) - 1):
-                        print(f'{numeros[i]:.2f} = {total:.2f}')
-                    else:
-                        print(f'{numeros[i]}', end=' + ')
-            except:
-                print('ERRO 001. INFORME APENAS NÚMEROS, TENTE NOVAMENTE!')
-
-        elif opcao == '2':
-            try:
-                numeros = input('INFORME OS NÚMEROS: ').split()
-                numeros = tuple(map(float, numeros))
-                total = subtraction(*numeros)
-                print('A SUBTRAÇÃO TOTAL', end=' ⭢ ')
-                for i in range(len(numeros)):
-                    if i == (len(numeros) - 1):
-                        print(f'{numeros[i]:.2f} = {total:.2f}')
-                    else:
-                        print(f'{numeros[i]}', end=' - ')
-            except:
-                print('ERRO 001. INFORME APENAS NÚMEROS, TENTE NOVAMENTE!')
-        
-        elif opcao == '3':
-            try:
-                numeros = input('INFORME OS NÚMEROS: ').split()
-                numeros = tuple(map(float, numeros))
-                total = multiplication(*numeros)
-                print('A SUBTRAÇÃO TOTAL', end=' ⭢ ')
-                for i in range(len(numeros)):
-                    if i == (len(numeros) - 1):
-                        print(f'{numeros[i]:.2f} = {total:.2f}')
-                    else:
-                        print(f'{numeros[i]}', end=' x ')
-            except:
-                print('ERRO 001. INFORME APENAS NÚMEROS, TENTE NOVAMENTE!')
-        
-        elif opcao == '4':
-            try:
-                numeros = input('INFORME OS NÚMEROS: ').split()
-                numeros = tuple(map(float, numeros))
-                total = division(*numeros)
-                print('A SUBTRAÇÃO TOTAL', end=' ⭢ ')
-                for i in range(len(numeros)):
-                    if i == (len(numeros) - 1):
-                        print(f'{numeros[i]:.2f} = {total:.2f}')
-                    else:
-                        print(f'{numeros[i]}', end=' ÷ ')
-            except:
-                print('ERRO 001. INFORME APENAS NÚMEROS, TENTE NOVAMENTE!')
-        
-        elif opcao == '5':
-            print('POTENCIA')
-        elif opcao == '6':
-            print('=== CALCULADORA ENCERRADA ===')
+        if opcao == '6':
+            print('=== FINALIZANDO CALCULADORA ===')
             break
+
+        try:
+            numeros = input('INFORME OS NÚMEROS: ').split()
+            numeros = tuple(map(float, numeros))
+        except:
+            print('ERRO 001! INFORME APENAS NÚMEROS, TENTE NOVAMENTE!')
+            continue
+
+        if opcao == '1':
+            total = sum(*numeros)
+            simbolo = '+'
+        elif opcao == '2':
+            total = subtraction(*numeros)
+            simbolo = '-'
+        elif opcao == '3':
+            total = multiplication(*numeros)
+            simbolo = 'x'
+        elif opcao == '4':
+            total = division(*numeros)
+            simbolo = '÷'
+        elif opcao == '5':
+
+        else:
+            print('ERRO 002! Opção inválido!')
+
+        print('RESULTADO:', end=' ')
+        print(' {} '.format(simbolo).join(map(str, numeros)), f'= {total:.2f}')
